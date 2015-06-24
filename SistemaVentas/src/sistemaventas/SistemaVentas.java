@@ -7,7 +7,8 @@ package sistemaventas;
 
 /**
  *
- * @author jhonny
+ * @author jhonny Torres
+ * @author Leonado Moreno
  */
 public class SistemaVentas {
 
