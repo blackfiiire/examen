@@ -27,21 +27,84 @@ public class PPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnEmpleados = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
+        btnDetalles = new javax.swing.JButton();
+        btnProductos = new javax.swing.JButton();
+        btnProveedor = new javax.swing.JButton();
+        btnventas = new javax.swing.JButton();
+        DP = new javax.swing.JDesktopPane();
+        Fondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1266, 731));
+        getContentPane().setLayout(null);
+
+        btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/btnEmpleados.jpg"))); // NOI18N
+        btnEmpleados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnEmpleados);
+        btnEmpleados.setBounds(1010, 70, 160, 50);
+
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/btnCliente.jpg"))); // NOI18N
+        btnClientes.setToolTipText("");
+        btnClientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnClientes);
+        btnClientes.setBounds(790, 70, 160, 50);
+        btnClientes.getAccessibleContext().setAccessibleName("btnClientes");
+
+        btnDetalles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/btnDetalle.jpg"))); // NOI18N
+        btnDetalles.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnDetalles);
+        btnDetalles.setBounds(1010, 10, 160, 50);
+
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/btnProducto.jpg"))); // NOI18N
+        btnProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnProductos);
+        btnProductos.setBounds(790, 10, 160, 50);
+
+        btnProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/btnProveedor.jpg"))); // NOI18N
+        btnProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btnProveedor);
+        btnProveedor.setBounds(570, 70, 160, 50);
+
+        btnventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/btnVentas.jpg"))); // NOI18N
+        btnventas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnventas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnventasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnventas);
+        btnventas.setBounds(570, 10, 160, 50);
+
+        javax.swing.GroupLayout DPLayout = new javax.swing.GroupLayout(DP);
+        DP.setLayout(DPLayout);
+        DPLayout.setHorizontalGroup(
+            DPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1270, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        DPLayout.setVerticalGroup(
+            DPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 490, Short.MAX_VALUE)
         );
+
+        getContentPane().add(DP);
+        DP.setBounds(0, 130, 1270, 490);
+
+        Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/layout Principal.jpg"))); // NOI18N
+        Fondo.setText("jLabel1");
+        getContentPane().add(Fondo);
+        Fondo.setBounds(0, 0, 1266, 731);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnventasActionPerformed
+        // Crear instancia ventas
+        JIVentas ventas = new JIVentas();
+        DP.add(ventas);
+        ventas.setVisible(true);
+    }//GEN-LAST:event_btnventasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +142,13 @@ public class PPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane DP;
+    private javax.swing.JLabel Fondo;
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnDetalles;
+    private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnProveedor;
+    private javax.swing.JButton btnventas;
     // End of variables declaration//GEN-END:variables
 }

@@ -39,12 +39,23 @@ public class Login extends javax.swing.JFrame {
         tfContraseña = new javax.swing.JPasswordField();
         CBXperfil = new javax.swing.JComboBox();
         btnIniciarSesion = new javax.swing.JButton();
+        fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Bienvenido");
+        setBackground(java.awt.Color.lightGray);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tfRut.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        getContentPane().add(tfRut, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 210, -1));
+
+        tfContraseña.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        getContentPane().add(tfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 210, -1));
+
+        CBXperfil.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         CBXperfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empleado", "Cliente" }));
+        getContentPane().add(CBXperfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 210, -1));
 
         btnIniciarSesion.setText("Iniciar Sesion");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
@@ -52,34 +63,11 @@ public class Login extends javax.swing.JFrame {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
+        getContentPane().add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(121, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfContraseña)
-                        .addComponent(tfRut)
-                        .addComponent(CBXperfil, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnIniciarSesion))
-                .addGap(122, 122, 122))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(tfRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(tfContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(CBXperfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(btnIniciarSesion)
-                .addContainerGap(68, Short.MAX_VALUE))
-        );
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Layout Login.jpg"))); // NOI18N
+        fondo.setText("jLabel1");
+        getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -183,6 +171,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CBXperfil;
     private javax.swing.JButton btnIniciarSesion;
+    private javax.swing.JLabel fondo;
     private javax.swing.JPasswordField tfContraseña;
     private javax.swing.JTextField tfRut;
     // End of variables declaration//GEN-END:variables
