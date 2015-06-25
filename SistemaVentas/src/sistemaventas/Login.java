@@ -1,5 +1,10 @@
 package sistemaventas;
 
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 
 /*
@@ -81,10 +86,60 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         // Crear intancia conexion
-        DbConnection conexion = new DbConnection();
+        ConexionBD conexion = new ConexionBD();
+        Connection cn = conexion.conectar();
         //abrir conexion
-        conexion.getConnection();
+        conexion.conectar();
+        //Crear variables y asignar valores
+        String Usuario = tfRut.getText();
+        String Contraseña = tfContraseña.getText();
+        String Tipo = (String) CBXperfil.getSelectedItem();
+        String Perfil = "";
+        //Saber si es cliente o empleado
+        if(Tipo.equals("Cliente")){
+            Perfil = "0";
+        }else{
+            Perfil = "1";
+        }
         //
+        if(Perfil.equals("0")){
+            try {
+                //Crear consulta para cliente
+                String Query = "SELECT * FROM cliente WHERE Rut = "+Usuario+" and Contraseña = '"+Contraseña+"' and Perfil = 0";
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(Query);
+                if(rs.next())
+                {
+                    this.dispose();
+                    PPrincipal PP = new PPrincipal();
+                    PP.setVisible(true);
+                }else
+                {
+                    JOptionPane.showMessageDialog(this, "Error, Ingrese sus datos Correctamete");
+                }    
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else{
+            try {
+                //Crear consulta para cliente
+                String Query = "SELECT * FROM empleado WHERE Rut = "+Usuario+" and Contraseña = '"+Contraseña+"' and Perfil = 1";
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(Query);
+                if(rs.next())
+                {
+                    this.dispose();
+                    PPrincipal PP = new PPrincipal();
+                    PP.setVisible(true);
+                }else
+                {
+                    JOptionPane.showMessageDialog(this, "Error, Ingrese sus datos Correctamete");
+                }    
+            } catch (SQLException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
         
         
         

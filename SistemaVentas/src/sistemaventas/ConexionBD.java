@@ -9,7 +9,7 @@ import java.sql.*;
  *
  * @author jhonny
  */
-public class DbConnection {
+public class ConexionBD {
     /**Parametros de conexion*/
    static String bd = "examen";
    static String login = "root";
@@ -19,7 +19,7 @@ public class DbConnection {
    Connection connection = null;
  
    /** Constructor de DbConnection */
-   public DbConnection() {
+   public ConexionBD() {
       try{
          //obtenemos el driver de para mysql
          Class.forName("com.mysql.jdbc.Driver");
@@ -39,7 +39,7 @@ public class DbConnection {
       }
    }
    /**Permite retornar la conexión*/
-   public Connection getConnection(){
+   public Connection conectar(){
       return connection;
    }
  
