@@ -34,7 +34,21 @@ public class JIVentas extends javax.swing.JInternalFrame {
         Total = new javax.swing.JLabel();
         Fecha1 = new javax.swing.JLabel();
         Empleado = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        Fecha2 = new javax.swing.JLabel();
+        Fecha3 = new javax.swing.JLabel();
+        tfRutCliente = new javax.swing.JTextField();
+        tfNombreCliente = new javax.swing.JTextField();
+        Fecha4 = new javax.swing.JLabel();
+        Fecha5 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        Fecha6 = new javax.swing.JLabel();
+        tfCodigo = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnAgregar1 = new javax.swing.JButton();
+        btnAgregar2 = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JSeparator();
+        NumeroVenta = new javax.swing.JLabel();
         fondo = new javax.swing.JLabel();
 
         setTitle("Ventas");
@@ -42,6 +56,7 @@ public class JIVentas extends javax.swing.JInternalFrame {
         setRequestFocusEnabled(false);
         getContentPane().setLayout(null);
 
+        jTable1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -53,7 +68,7 @@ public class JIVentas extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(790, 60, 452, 330);
+        jScrollPane1.setBounds(492, 60, 750, 330);
 
         Fecha.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         Fecha.setForeground(new java.awt.Color(255, 255, 255));
@@ -77,15 +92,85 @@ public class JIVentas extends javax.swing.JInternalFrame {
         Fecha1.setForeground(new java.awt.Color(255, 255, 255));
         Fecha1.setText("FECHA");
         getContentPane().add(Fecha1);
-        Fecha1.setBounds(10, 10, 140, 50);
+        Fecha1.setBounds(20, 10, 140, 50);
 
         Empleado.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         Empleado.setForeground(new java.awt.Color(255, 255, 255));
         Empleado.setText("USTED ES ATENDIDO POR :");
         getContentPane().add(Empleado);
         Empleado.setBounds(610, 10, 180, 50);
-        getContentPane().add(jSeparator1);
-        jSeparator1.setBounds(10, 60, 770, 10);
+
+        Fecha2.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
+        Fecha2.setForeground(new java.awt.Color(255, 255, 255));
+        Fecha2.setText("PRODUCTO");
+        getContentPane().add(Fecha2);
+        Fecha2.setBounds(150, 250, 220, 50);
+
+        Fecha3.setFont(new java.awt.Font("Impact", 0, 48)); // NOI18N
+        Fecha3.setForeground(new java.awt.Color(255, 255, 255));
+        Fecha3.setText("CLIENTE");
+        getContentPane().add(Fecha3);
+        Fecha3.setBounds(170, 70, 160, 50);
+
+        tfRutCliente.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        getContentPane().add(tfRutCliente);
+        tfRutCliente.setBounds(160, 130, 230, 37);
+
+        tfNombreCliente.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        getContentPane().add(tfNombreCliente);
+        tfNombreCliente.setBounds(160, 180, 230, 37);
+
+        Fecha4.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        Fecha4.setForeground(new java.awt.Color(255, 255, 255));
+        Fecha4.setText("NOMBRE");
+        getContentPane().add(Fecha4);
+        Fecha4.setBounds(70, 170, 90, 50);
+
+        Fecha5.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        Fecha5.setForeground(new java.awt.Color(255, 255, 255));
+        Fecha5.setText("RUT");
+        getContentPane().add(Fecha5);
+        Fecha5.setBounds(110, 120, 50, 50);
+        getContentPane().add(jSeparator2);
+        jSeparator2.setBounds(10, 380, 470, 10);
+        getContentPane().add(jSeparator3);
+        jSeparator3.setBounds(10, 60, 470, 10);
+
+        Fecha6.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        Fecha6.setForeground(new java.awt.Color(255, 255, 255));
+        Fecha6.setText("CODIGO");
+        getContentPane().add(Fecha6);
+        Fecha6.setBounds(20, 310, 80, 50);
+
+        tfCodigo.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        getContentPane().add(tfCodigo);
+        tfCodigo.setBounds(110, 320, 120, 37);
+
+        btnAgregar.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(51, 102, 255));
+        btnAgregar.setText("Agregar");
+        getContentPane().add(btnAgregar);
+        btnAgregar.setBounds(240, 320, 111, 39);
+
+        btnAgregar1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        btnAgregar1.setForeground(new java.awt.Color(51, 102, 255));
+        btnAgregar1.setText("Quitar");
+        getContentPane().add(btnAgregar1);
+        btnAgregar1.setBounds(360, 320, 110, 39);
+
+        btnAgregar2.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        btnAgregar2.setForeground(new java.awt.Color(51, 102, 255));
+        btnAgregar2.setText("FACTURAR");
+        getContentPane().add(btnAgregar2);
+        btnAgregar2.setBounds(190, 400, 140, 39);
+        getContentPane().add(jSeparator4);
+        jSeparator4.setBounds(10, 230, 470, 10);
+
+        NumeroVenta.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        NumeroVenta.setForeground(new java.awt.Color(255, 255, 255));
+        NumeroVenta.setText("numero");
+        getContentPane().add(NumeroVenta);
+        NumeroVenta.setBounds(1140, 10, 140, 50);
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Layout.jpg"))); // NOI18N
         fondo.setPreferredSize(new java.awt.Dimension(1264, 493));
@@ -101,11 +186,25 @@ public class JIVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel Empleado;
     private javax.swing.JLabel Fecha;
     private javax.swing.JLabel Fecha1;
+    private javax.swing.JLabel Fecha2;
+    private javax.swing.JLabel Fecha3;
+    private javax.swing.JLabel Fecha4;
+    private javax.swing.JLabel Fecha5;
+    private javax.swing.JLabel Fecha6;
+    private javax.swing.JLabel NumeroVenta;
     private javax.swing.JLabel Total;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
+    private javax.swing.JButton btnAgregar2;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField tfCodigo;
+    private javax.swing.JTextField tfNombreCliente;
+    private javax.swing.JTextField tfRutCliente;
     // End of variables declaration//GEN-END:variables
 }
