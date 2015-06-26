@@ -98,6 +98,8 @@ public class Login extends javax.swing.JFrame {
                 ResultSet rs = st.executeQuery(Query);
                 if(rs.next())
                 {
+                    //obtener rut
+                    Variable.Rut = tfRut.getText();
                     this.dispose();
                     PPrincipal PP = new PPrincipal();
                     PP.setVisible(true);
@@ -116,6 +118,8 @@ public class Login extends javax.swing.JFrame {
                 ResultSet rs = st.executeQuery(Query);
                 if(rs.next())
                 {
+                    //obtener rut
+                    Variable.Rut = tfRut.getText();
                     this.dispose();
                     PPrincipal PP = new PPrincipal();
                     PP.setVisible(true);
