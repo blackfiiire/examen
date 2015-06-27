@@ -42,8 +42,21 @@ public class JIVentas extends javax.swing.JInternalFrame {
         
         //Ver NUmero de ventas
         VerNumero();
+        
+        //dar valor minimo a cantidad
+        tfCantidad.setText("1");
+        
+        //Iniciar Timer
+        timer.start();
     }
-    
+    Timer timer = new Timer (1000, new ActionListener ()
+{
+    public void actionPerformed(ActionEvent e)
+    {
+        //Ver NUmero de ventas
+        VerNumero();
+     }
+});
     //Metodo para buscar empleado
     public void BusEmpleado()
     {
@@ -184,6 +197,42 @@ public class JIVentas extends javax.swing.JInternalFrame {
              Total.setText(String.valueOf(sumatoria1));
         }
     }
+    
+    //Metodo para descontar productos de stock
+    public void DescontarStock(){
+            try {
+                //variable almacenar cantidad de productos
+                int CantPro = 0;
+                //abrir conexion
+                conexion.conectar();
+                //Ver cantidad disponible de productos
+                String query = "SELECT Stock FROM producto where('" + tfCodigo.getText() + "');";
+                Statement st = cn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                if(rs.next()==true)
+                {
+                    CantPro = rs.getInt("STOCK");
+                }
+                //cerrar conexion.
+                conexion.desconectar();
+                
+                //restar productos
+                int TotalStock = (CantPro - Integer.parseInt(tfCantidad.getText()));
+                
+                         //abrir nueva conexion
+                        conexion.conectar();
+                        String Query1 = "UPDATE producto SET Stock = " + TotalStock + " where Codigo ='" + tfCodigo.getText() + "'";
+                        Statement st1 = cn.createStatement();
+                        st1.executeUpdate(Query1);
+                        
+                        //cerrar conexion
+                        conexion.desconectar();
+                        //limpiar tfCodigo
+                        tfCodigo.setText("");
+            } catch (SQLException ex) {
+                Logger.getLogger(JIVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -213,8 +262,8 @@ public class JIVentas extends javax.swing.JInternalFrame {
         tfCodigo = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        btnAgregar1 = new javax.swing.JButton();
-        btnAgregar2 = new javax.swing.JButton();
+        btnQuitarProducto = new javax.swing.JButton();
+        btnFacturar = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JSeparator();
         NumeroVenta1 = new javax.swing.JLabel();
         NumeroVenta = new javax.swing.JLabel();
@@ -226,7 +275,7 @@ public class JIVentas extends javax.swing.JInternalFrame {
         setRequestFocusEnabled(false);
         getContentPane().setLayout(null);
 
-        jTable1.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -350,17 +399,27 @@ public class JIVentas extends javax.swing.JInternalFrame {
         getContentPane().add(btnAgregar);
         btnAgregar.setBounds(360, 320, 50, 39);
 
-        btnAgregar1.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        btnAgregar1.setForeground(new java.awt.Color(51, 102, 255));
-        btnAgregar1.setText("x");
-        getContentPane().add(btnAgregar1);
-        btnAgregar1.setBounds(420, 320, 50, 39);
+        btnQuitarProducto.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        btnQuitarProducto.setForeground(new java.awt.Color(51, 102, 255));
+        btnQuitarProducto.setText("x");
+        btnQuitarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarProductoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnQuitarProducto);
+        btnQuitarProducto.setBounds(420, 320, 50, 39);
 
-        btnAgregar2.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
-        btnAgregar2.setForeground(new java.awt.Color(51, 102, 255));
-        btnAgregar2.setText("FACTURAR");
-        getContentPane().add(btnAgregar2);
-        btnAgregar2.setBounds(190, 400, 140, 39);
+        btnFacturar.setFont(new java.awt.Font("Impact", 0, 24)); // NOI18N
+        btnFacturar.setForeground(new java.awt.Color(51, 102, 255));
+        btnFacturar.setText("FACTURAR");
+        btnFacturar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFacturar);
+        btnFacturar.setBounds(190, 400, 140, 39);
         getContentPane().add(jSeparator4);
         jSeparator4.setBounds(10, 230, 470, 10);
 
@@ -412,8 +471,96 @@ public class JIVentas extends javax.swing.JInternalFrame {
         {
             AgregarProductos();
             SumarTotal();
+            DescontarStock();
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnQuitarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarProductoActionPerformed
+            try {
+                //tomar modelo de la tabla
+                DefaultTableModel m = (DefaultTableModel) jTable1.getModel();
+                //Seleccionar Fila
+                int IdSelect = jTable1.getSelectedRow();
+                //obtener valores de Codigo de producto y cantidad
+                String codi = m.getValueAt(IdSelect, 1).toString();
+                String canti = m.getValueAt(IdSelect, 3).toString();
+                //abrir conexion
+                conexion.conectar();
+                //query
+                String Query = "DELETE FROM detalle_venta WHERE (Cod_producto = '" + codi + "') and (Num_venta = '" + NumeroVenta.getText() + "') and (Cantidad = '" + canti + "')";
+                Statement st = cn.createStatement();
+                st.execute(Query);
+                //cerrar conexion
+                conexion.desconectar();
+                
+                //aumentar productos
+                //variable almacenar cantidad de productos
+                int CantPro = 0;
+                //abrir conexion
+                conexion.conectar();
+                //Ver cantidad disponible de productos
+                String query = "SELECT Stock FROM producto where('" + codi + "')";
+                Statement st1 = cn.createStatement();
+                ResultSet rs1 = st1.executeQuery(query);
+                if(rs1.next()==true)
+                {
+                    CantPro = rs1.getInt("STOCK");
+                    JOptionPane.showMessageDialog(this, CantPro);
+                }
+                //cerrar conexion.
+                conexion.desconectar();
+                
+                //restar productos
+                int TotalStock = (CantPro + Integer.parseInt(canti));
+                
+                         //abrir nueva conexion
+                        conexion.conectar();
+                        String Query2 = "UPDATE producto SET Stock = " + TotalStock + " where Codigo ='" + codi + "'";
+                        Statement st2 = cn.createStatement();
+                        st2.executeUpdate(Query2);
+                        
+                        //cerrar conexion
+                        conexion.desconectar();
+                        //remover fila de jtable
+                        m.removeRow(IdSelect); 
+                        //Limpiar total
+                        Total.setText("0");
+                        //Actualizar total
+                        SumarTotal();
+            } catch (SQLException ex) {
+                Logger.getLogger(JIVentas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }//GEN-LAST:event_btnQuitarProductoActionPerformed
+
+    private void btnFacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturarActionPerformed
+        Variable.Total = Total.getText();
+        Variable.NumeroVenta = NumeroVenta.getText();
+        Variable.Fecha = Fecha1.getText();
+      
+        //Crear instancia facturar
+        Facturar Fac = new Facturar();
+        
+        //Limpiar Tabla
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "N° venta", "Producto", "Detalle", "Cantidad", "Precio Unitario", "Total"
+            }
+        ));
+        
+        Total.setText("0");
+        
+        //Limpiar campos
+        tfRutCliente.setText("");
+        tfNombreCliente.setText("");
+        tfCantidad.setText("1");
+        
+        //Mostrar frame facturar
+        Fac.setVisible(true);
+        
+    }//GEN-LAST:event_btnFacturarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -430,9 +577,9 @@ public class JIVentas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel NumeroVenta1;
     private javax.swing.JLabel Total;
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnAgregar1;
-    private javax.swing.JButton btnAgregar2;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnFacturar;
+    private javax.swing.JButton btnQuitarProducto;
     private javax.swing.JLabel fondo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

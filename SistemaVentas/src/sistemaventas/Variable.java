@@ -11,4 +11,7 @@ package sistemaventas;
  */
 public class Variable {
     public static String Rut;
+    public static String Total;
+    public static String NumeroVenta;
+    public static String Fecha;
 }
