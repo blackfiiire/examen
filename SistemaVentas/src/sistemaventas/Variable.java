@@ -14,4 +14,5 @@ public class Variable {
     public static String Total;
     public static String NumeroVenta;
     public static String Fecha;
+    public static String Tipo;
 }

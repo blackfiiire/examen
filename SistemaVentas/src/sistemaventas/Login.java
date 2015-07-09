@@ -1,9 +1,12 @@
 package sistemaventas;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 
 
@@ -24,8 +27,13 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        limitar();
+        SNumeros(tfRut);
     }
-
+    public void limitar(){
+        tfRut.setDocument(new Limitador(tfRut, 8));
+        tfContraseña.setDocument(new Limitador (tfContraseña,30));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +46,7 @@ public class Login extends javax.swing.JFrame {
         tfRut = new javax.swing.JTextField();
         tfContraseña = new javax.swing.JPasswordField();
         CBXperfil = new javax.swing.JComboBox();
+        btnCancelar = new javax.swing.JButton();
         btnIniciarSesion = new javax.swing.JButton();
         fondo = new javax.swing.JLabel();
 
@@ -48,22 +57,34 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tfRut.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        tfRut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(tfRut, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 210, 210, -1));
 
         tfContraseña.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
+        tfContraseña.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         getContentPane().add(tfContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 210, -1));
 
         CBXperfil.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
         CBXperfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Empleado", "Cliente" }));
         getContentPane().add(CBXperfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 290, 210, -1));
 
+        btnCancelar.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
+        btnCancelar.setText("CANCELAR");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+
+        btnIniciarSesion.setFont(new java.awt.Font("Impact", 0, 14)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesion");
         btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarSesionActionPerformed(evt);
             }
         });
-        getContentPane().add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 380, -1, -1));
+        getContentPane().add(btnIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 380, -1, -1));
 
         fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Layout Login.jpg"))); // NOI18N
         fondo.setText("jLabel1");
@@ -86,8 +107,10 @@ public class Login extends javax.swing.JFrame {
         //Saber si es cliente o empleado
         if(Tipo.equals("Cliente")){
             Perfil = "0";
+            Variable.Tipo = "0";
         }else{
             Perfil = "1";
+            Variable.Tipo = "1";
         }
         //
         if(Perfil.equals("0")){
@@ -137,6 +160,10 @@ public class Login extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnIniciarSesionActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -171,9 +198,26 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-
+    //Metodo para validar solo numeros
+    public void SNumeros (JTextField a){
+    //permite hacer la llamada al evento
+        //KeyAdapter es una clase abstracta que se adapta para recibir los eventos del teclado
+        a.addKeyListener(new KeyAdapter() {
+            //Evento a utilizar
+            public void keyTyped(KeyEvent e){
+            //La variable char extrae la variable que se ingresa
+                char c=e.getKeyChar();
+                if(Character.isLetter(c)){
+                //Sonido en caso que se ingrese un caracter no admitido
+                getToolkit().beep();
+                e.consume();
+                }
+            }
+        });
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox CBXperfil;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JLabel fondo;
     private javax.swing.JPasswordField tfContraseña;

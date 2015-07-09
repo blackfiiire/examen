@@ -5,10 +5,13 @@
  */
 package sistemaventas;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -23,6 +26,7 @@ Connection cn = conexion.conectar();
     public Facturar() {
         initComponents();
         Total.setText(Variable.Total);
+        SNumeros(tfEfectivo);
     }
 
     /**
@@ -63,7 +67,6 @@ Connection cn = conexion.conectar();
 
         Total.setFont(new java.awt.Font("Impact", 0, 28)); // NOI18N
         Total.setForeground(new java.awt.Color(255, 255, 255));
-        Total.setText("jLabel2");
         getContentPane().add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 20, 120, 45));
 
         jLabel3.setFont(new java.awt.Font("Impact", 1, 24)); // NOI18N
@@ -78,7 +81,6 @@ Connection cn = conexion.conectar();
 
         Vuelto.setFont(new java.awt.Font("Impact", 0, 28)); // NOI18N
         Vuelto.setForeground(new java.awt.Color(255, 255, 255));
-        Vuelto.setText("jLabel5");
         getContentPane().add(Vuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 120, -1));
 
         tfEfectivo.setFont(new java.awt.Font("Impact", 0, 18)); // NOI18N
@@ -154,6 +156,23 @@ Connection cn = conexion.conectar();
     }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+           //Metodo para validar solo numeros
+    public void SNumeros (JTextField a){
+    //permite hacer la llamada al evento
+        //KeyAdapter es una clase abstracta que se adapta para recibir los eventos del teclado
+        a.addKeyListener(new KeyAdapter() {
+            //Evento a utilizar
+            public void keyTyped(KeyEvent e){
+            //La variable char extrae la variable que se ingresa
+                char c=e.getKeyChar();
+                if(Character.isLetter(c)){
+                //Sonido en caso que se ingrese un caracter no admitido
+                getToolkit().beep();
+                e.consume();
+                }
+            }
+        });
+    }
     /**
      * @param args the command line arguments
      */

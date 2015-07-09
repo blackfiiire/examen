@@ -32,6 +32,7 @@ public class JIVentas extends javax.swing.JInternalFrame {
      */
     public JIVentas() {
         initComponents();
+        this.tfRutCliente.requestFocus();
         //Crear instancia calendario
         Calendar cal = Calendar.getInstance();
         //Asignar fecha a label 
@@ -48,7 +49,14 @@ public class JIVentas extends javax.swing.JInternalFrame {
         
         //Iniciar Timer
         timer.start();
+        
+        limitar();
     }
+    
+     public void limitar(){
+        tfRutCliente.setDocument(new Limitador(tfRutCliente, 8));
+    }
+    
     Timer timer = new Timer (1000, new ActionListener ()
 {
     public void actionPerformed(ActionEvent e)
@@ -303,7 +311,6 @@ public class JIVentas extends javax.swing.JInternalFrame {
 
         Total.setFont(new java.awt.Font("Impact", 3, 36)); // NOI18N
         Total.setForeground(new java.awt.Color(255, 255, 255));
-        Total.setText("TOTAL :$");
         getContentPane().add(Total);
         Total.setBounds(990, 400, 150, 50);
 
@@ -505,7 +512,6 @@ public class JIVentas extends javax.swing.JInternalFrame {
                 if(rs1.next()==true)
                 {
                     CantPro = rs1.getInt("STOCK");
-                    JOptionPane.showMessageDialog(this, CantPro);
                 }
                 //cerrar conexion.
                 conexion.desconectar();
